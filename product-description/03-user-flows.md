@@ -1,3 +1,7 @@
+---
+title: User Flows
+desc: This document contains all user flows regarding the product. Think of happy flow's but also non-happy and edge cases.
+---
 
 # User Flow: Adding a New Feature via Product Description
 
@@ -26,9 +30,9 @@ Gareth evaluates the proposal against strategy and vision, reacts emotionally to
 ## Main Flow
 
 ### 1. Add Feature Description
+- Problem or opportunity
 - The Product Owner adds a new feature section to the product description file.
 - The description contains:
-  - Problem or opportunity
   - Target user
   - Intended value or outcome
 
