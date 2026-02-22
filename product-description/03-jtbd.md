@@ -1,3 +1,8 @@
+---
+title: jobs to be done
+desc: describe the jobs that users need to get done
+---
+
 ## Job 1: Defining a Strategically Aligned Feature
 
 ### Core Job Statement:

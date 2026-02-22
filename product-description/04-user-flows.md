@@ -1,6 +1,6 @@
 ---
 title: User Flows
-desc: This document contains all user flows regarding the product. Think of happy flow's but also non-happy and edge cases.
+desc: This document contains all user flows regarding the product. Think of happy flow's but also non-happy and edge cases. This set will grow and also needs to be uodated after flows change.
 ---
 
 # User Flow: Adding a New Feature via Product Description
@@ -10,20 +10,18 @@ desc: This document contains all user flows regarding the product. Think of happ
 
 ## System Actors
 - Gareth (Alignment & Validation Engine)
-- Backlog System
 
 ---
 
 ## Preconditions
-- Product strategy and product vision are defined and accessible
-- Product description file exists and is monitored
-- Backlog system is connected and writable
+- Product strategy, product vision, Jobs to be done and a product description are defined and accessible
 
 ---
 
 ## Flow Overview
-A Product Owner proposes a new feature by updating the product description file.  
-Gareth evaluates the proposal against strategy and vision, reacts emotionally to the result, and—when aligned—creates a user story in the backlog.
+- The product owner opens the feature validator page and inputs the feature idea. 
+- Gareth agents will verify alignment with all product defining documents.
+- Gareth will display the conclusions, the prove and ways to improve the feature if possible.
 
 ---
 
@@ -31,15 +29,13 @@ Gareth evaluates the proposal against strategy and vision, reacts emotionally to
 
 ### 1. Add Feature Description
 - Problem or opportunity
-- The Product Owner adds a new feature section to the product description file.
+- The Product Owner adds a new feature in the feature validator.
 - The description contains:
-  - Target user
-  - Intended value or outcome
+  - Goal, context, user and ways to accept/test.
 
 ---
 
 ### 2. Detect Change
-- The system detects a change in the product description file.
 - The new feature proposal is extracted and queued for evaluation.
 
 ---
@@ -48,7 +44,9 @@ Gareth evaluates the proposal against strategy and vision, reacts emotionally to
 Gareth evaluates the proposed feature against:
 - Product strategy
 - Product vision
+- Jobs to be done (if available)
 - Existing user flows (if available)
+- Product description
 
 Evaluation dimensions:
 - Strategic fit
@@ -76,9 +74,9 @@ Evaluation dimensions:
 - Because the feature aligns, the system automatically:
   - Generates a user story
   - Links it to:
-    - The original feature description
     - Relevant strategy and vision elements
   - Adds the user story to the backlog
+  - Tags the user story with 'validated'
 
 **Outcome**
 - Feature moves seamlessly from intent to execution
