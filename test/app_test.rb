@@ -14,4 +14,11 @@ class AppTest < Minitest::Test
     assert json.key?("summary")
     assert json.key?("evaluations")
   end
+
+  def test_evaluate_returns_real_evaluations
+    post "/evaluate", { feature_proposal: "Test feature" }
+    json = JSON.parse(last_response.body)
+    assert json["evaluations"].any?
+    assert json["evaluations"].first.key?("agent")
+  end
 end
