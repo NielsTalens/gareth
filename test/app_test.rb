@@ -26,4 +26,15 @@ class AppTest < Minitest::Test
     get "/"
     assert_includes last_response.body, "id=\"summary\""
   end
+
+  def test_all_evaluators_returned
+    post "/evaluate", { feature_proposal: "Test feature" }
+    json = JSON.parse(last_response.body)
+    agents = json["evaluations"].map { |e| e["agent"] }
+    assert_includes agents, "vision"
+    assert_includes agents, "jtbd"
+    assert_includes agents, "user_flows"
+    assert_includes agents, "product_description"
+    assert_includes agents, "feedback"
+  end
 end
