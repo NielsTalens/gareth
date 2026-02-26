@@ -33,7 +33,7 @@ class OpenAIClient
     }.to_json
 
     response = http_client(uri).request(request)
-    raise ApiError, "OpenAI API error #{response.code}" unless response.is_a?(Net::HTTPSuccess)
+    raise ApiError, build_api_error_message(response) unless response.is_a?(Net::HTTPSuccess)
 
     payload = JSON.parse(response.body)
     content = payload.dig("choices", 0, "message", "content")
@@ -53,4 +53,26 @@ class OpenAIClient
     http.read_timeout = @timeout_seconds
     http
   end
+
+  def build_api_error_message(response)
+    parsed = parse_error_payload(response.body)
+    error = parsed["error"].is_a?(Hash) ? parsed["error"] : {}
+
+    message = error["message"].to_s.strip
+    type = error["type"].to_s.strip
+    code = error["code"].to_s.strip
+
+    parts = ["OpenAI API error #{response.code}"]
+    parts << "- #{message}" unless message.empty?
+    parts << "(type: #{type})" unless type.empty?
+    parts << "(code: #{code})" unless code.empty?
+    parts.join(" ")
+  end
+
+  def parse_error_payload(body)
+    JSON.parse(body.to_s)
+  rescue JSON::ParserError
+    {}
+  end
+
 end
