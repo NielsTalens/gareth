@@ -98,4 +98,25 @@ class AppTest < Minitest::Test
     get "/"
     assert_includes last_response.body, "id=\"loading\""
   end
+
+  def test_evaluate_saves_feature_input_and_json_output_to_markdown_file
+    output_dir = File.expand_path("../projects-output", __dir__)
+    before_files = Dir.glob(File.join(output_dir, "project-*.md"))
+    created_files = []
+
+    post "/evaluate", { feature_proposal: "Save me for validation" }
+
+    after_files = Dir.glob(File.join(output_dir, "project-*.md"))
+    created_files = after_files - before_files
+
+    assert_equal 1, created_files.length
+
+    content = File.read(created_files.first)
+    assert_includes content, "Save me for validation"
+    assert_includes content, "\"evaluations\""
+    assert_includes content, "\"errors\""
+    assert_includes content, "\"meta\""
+  ensure
+    created_files.each { |file| File.delete(file) if File.exist?(file) }
+  end
 end

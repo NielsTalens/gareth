@@ -2,6 +2,7 @@ require "sinatra"
 require "json"
 
 require_relative "lib/openai_client"
+require_relative "lib/run_logger"
 require_relative "lib/evaluators/base"
 require_relative "lib/evaluators/strategy"
 require_relative "lib/evaluators/vision"
@@ -95,7 +96,7 @@ post "/evaluate" do
   sorted_evaluations = evaluations.sort_by { |item| index_by_agent.fetch(item["agent"], 999) }
   sorted_errors = errors.sort_by { |item| index_by_agent.fetch(item["agent"], 999) }
 
-  {
+  response_payload = {
     evaluations: sorted_evaluations,
     errors: sorted_errors,
     meta: {
@@ -103,5 +104,8 @@ post "/evaluate" do
       succeeded: sorted_evaluations.length,
       failed: sorted_errors.length
     }
-  }.to_json
+  }
+
+  RunLogger.save(feature_input: feature, result_payload: response_payload)
+  response_payload.to_json
 end
