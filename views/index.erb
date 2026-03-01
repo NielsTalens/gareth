@@ -11,7 +11,7 @@
         <div class="project-warning">No projects found in /home/nelis/Dev/gareth/projects</div>
       <% else %>
         <% @projects.each do |project| %>
-          <button class="project-tag<%= project == @default_project ? " active" : "" %>" data-project="<%= project %>">
+          <button type="button" class="project-tag<%= project == @default_project ? " active" : "" %>" data-project="<%= project %>">
             <%= project %>
           </button>
         <% end %>
@@ -22,7 +22,7 @@
         <h1>Feature Proposal</h1>
         <p class="input-help">Paste a proposed feature and run an evaluation.</p>
         <textarea id="feature-input" class="feature-textarea"></textarea>
-        <button id="evaluate" class="primary-button">Evaluate</button>
+        <button type="button" id="evaluate" class="primary-button">Evaluate</button>
         <div id="loading" class="hidden">Running evaluators...</div>
       </section>
       <section class="right">

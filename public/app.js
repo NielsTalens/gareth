@@ -82,6 +82,11 @@ projectTags.forEach((tag) => {
   });
 });
 
+function getSelectedProject() {
+  const activeTag = projectTags.find((tag) => tag.classList.contains("active"));
+  return activeTag?.dataset.project || selectedProject;
+}
+
 if (evaluateButton) {
   evaluateButton.disabled = projectTags.length === 0;
   evaluateButton.addEventListener("click", async () => {
@@ -90,7 +95,9 @@ if (evaluateButton) {
     if (loading) loading.classList.remove("hidden");
 
     try {
-      if (!selectedProject) {
+      const project = getSelectedProject();
+
+      if (!project) {
         evaluateButton.disabled = false;
         evaluateButton.textContent = "Evaluate";
         if (loading) loading.classList.add("hidden");
@@ -102,7 +109,7 @@ if (evaluateButton) {
       const res = await fetch("/evaluate", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ feature_proposal: feature, project: selectedProject })
+        body: new URLSearchParams({ feature_proposal: feature, project })
       });
       const data = await res.json();
       const summary = document.getElementById("summary");
@@ -111,7 +118,7 @@ if (evaluateButton) {
 
       const cards = document.getElementById("cards");
       cards.innerHTML = "";
-      data.evaluations.forEach((ev) => {
+      (data.evaluations || []).forEach((ev) => {
         const card = document.createElement("div");
         card.className = "card";
         const scoreClass = `score-${Math.max(1, Math.min(5, Number(ev.alignment_score) || 1))}`;

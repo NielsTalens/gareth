@@ -40,7 +40,12 @@ class AppTest < Minitest::Test
   def test_evaluate_requires_project_param
     post "/evaluate", { feature_proposal: "Test feature" }
     assert_equal 400, last_response.status
-    assert_includes last_response.body, "project parameter is required"
+    payload = JSON.parse(last_response.body)
+    assert_equal [], payload["evaluations"]
+    assert_kind_of Array, payload["errors"]
+    assert_equal 1, payload["errors"].length
+    assert_includes payload["errors"].first["message"], "project parameter is required"
+    assert_equal 0, payload.dig("meta", "total")
   end
 
   def test_evaluate_rejects_unknown_project

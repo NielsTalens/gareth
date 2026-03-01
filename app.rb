@@ -29,6 +29,24 @@ helpers do
        .select { |entry| File.directory?(File.join(PROJECTS_ROOT, entry)) }
        .sort
   end
+
+  def bad_request_payload(message)
+    {
+      evaluations: [],
+      errors: [
+        {
+          agent: "request",
+          error_code: "bad_request",
+          message: message
+        }
+      ],
+      meta: {
+        total: 0,
+        succeeded: 0,
+        failed: 1
+      }
+    }
+  end
 end
 
 get "/" do
@@ -42,13 +60,13 @@ post "/evaluate" do
   feature = params["feature_proposal"].to_s
   project = params["project"].to_s.strip
 
-  halt 400, { error: "project parameter is required" }.to_json if project.empty?
+  halt 400, bad_request_payload("project parameter is required").to_json if project.empty?
 
   project_path = File.join(PROJECTS_ROOT, project)
-  halt 400, { error: "Unknown project: #{project}" }.to_json unless Dir.exist?(project_path)
+  halt 400, bad_request_payload("Unknown project: #{project}").to_json unless Dir.exist?(project_path)
 
   md_files = Dir.glob(File.join(project_path, "*.md"))
-  halt 400, { error: "No .md files found for project #{project}" }.to_json if md_files.empty?
+  halt 400, bad_request_payload("No .md files found for project #{project}").to_json if md_files.empty?
 
   read_doc = lambda do |path, label|
     File.exist?(path) ? File.read(path) : "No #{label} document provided."
