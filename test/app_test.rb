@@ -66,7 +66,7 @@ class AppTest < Minitest::Test
 
   def test_index_has_two_panel_layout
     get "/"
-    assert_includes last_response.body, "class=\"layout\""
+    assert_includes last_response.body, "class=\"layout page\""
   end
 
   def test_index_includes_loader_container
