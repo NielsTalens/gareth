@@ -8,7 +8,7 @@ class AppTest < Minitest::Test
   end
 
   def test_evaluate_returns_json
-    post "/evaluate", { feature_proposal: "Test feature" }
+    post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     assert last_response.ok?
     json = JSON.parse(last_response.body)
     assert json.key?("evaluations")
@@ -18,7 +18,7 @@ class AppTest < Minitest::Test
   end
 
   def test_evaluate_returns_real_evaluations
-    post "/evaluate", { feature_proposal: "Test feature" }
+    post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     json = JSON.parse(last_response.body)
     combined = json["evaluations"] + json["errors"]
     assert combined.any?
@@ -30,8 +30,33 @@ class AppTest < Minitest::Test
     assert_includes last_response.body, "id=\"summary\""
   end
 
-  def test_all_evaluators_returned
+  def test_index_renders_project_tags
+    get "/"
+    assert last_response.ok?
+    assert_includes last_response.body, "data-project-tags"
+    assert_includes last_response.body, "crm"
+  end
+
+  def test_evaluate_requires_project_param
     post "/evaluate", { feature_proposal: "Test feature" }
+    assert_equal 400, last_response.status
+    assert_includes last_response.body, "project parameter is required"
+  end
+
+  def test_evaluate_rejects_unknown_project
+    post "/evaluate", { feature_proposal: "Test feature", project: "does-not-exist" }
+    assert_equal 400, last_response.status
+    assert_includes last_response.body, "Unknown project"
+  end
+
+  def test_evaluate_rejects_project_without_md
+    post "/evaluate", { feature_proposal: "Test feature", project: "empty_project" }
+    assert_equal 400, last_response.status
+    assert_includes last_response.body, "No .md files found"
+  end
+
+  def test_all_evaluators_returned
+    post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     json = JSON.parse(last_response.body)
     agents = (json["evaluations"] + json["errors"]).map { |e| e["agent"] }
     assert_includes agents, "strategy"
@@ -43,7 +68,7 @@ class AppTest < Minitest::Test
   end
 
   def test_evaluate_returns_meta_counts
-    post "/evaluate", { feature_proposal: "Test feature" }
+    post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     json = JSON.parse(last_response.body)
     meta = json["meta"]
     assert_equal 6, meta["total"]
@@ -54,7 +79,7 @@ class AppTest < Minitest::Test
     original_method = Evaluators::Vision.instance_method(:call)
     Evaluators::Vision.send(:define_method, :call) { |_feature, _docs| raise "boom" }
 
-    post "/evaluate", { feature_proposal: "Test feature" }
+    post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     json = JSON.parse(last_response.body)
 
     vision_error = json["errors"].find { |error| error["agent"] == "vision" }

@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
+    <div class="project-tags" data-project-tags>
+      <% if @projects.empty? %>
+        <div class="project-warning">No projects found in /home/nelis/Dev/gareth/projects</div>
+      <% else %>
+        <% @projects.each do |project| %>
+          <button class="project-tag<%= project == @default_project ? " active" : "" %>" data-project="<%= project %>">
+            <%= project %>
+          </button>
+        <% end %>
+      <% end %>
+    </div>
     <main class="layout page">
       <section class="left">
         <h1>Feature Proposal</h1>
