@@ -8,7 +8,7 @@ Purpose:
 
 Status:
 - This prompt is currently not wired into the running Sinatra app.
-- Today the app runs the six feature evaluators in `app.rb`: strategy, vision, jtbd, user_flows, product_charter, and feedback.
+- Today the app runs the five feature evaluators in `app.rb`: strategy, vision, jtbd, product_charter, and feedback.
 - Treat this file as a standalone prompt for future document-level coherence checks or for manual use.
 
 USER INPUTS:

@@ -24,7 +24,6 @@
 - Modify: `lib/evaluators/strategy.rb`
 - Modify: `lib/evaluators/vision.rb`
 - Modify: `lib/evaluators/jtbd.rb`
-- Modify: `lib/evaluators/user_flows.rb`
 - Modify: `lib/evaluators/product_charter.rb`
 - Modify: `lib/evaluators/feedback.rb`
 

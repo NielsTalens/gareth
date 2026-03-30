@@ -6,6 +6,7 @@ module Evaluators
       confidence_score
       risk_level
       detected_conflicts
+      mostly_aligns_with
       what_would_make_this_a_5_of_5
     ].freeze
 
@@ -35,6 +36,7 @@ module Evaluators
         "confidence_score" => bounded_score(fetch_value(data, "confidence_score"), 2),
         "risk_level" => normalized_risk(fetch_value(data, "risk_level")),
         "detected_conflicts" => normalized_conflicts(fetch_value(data, "detected_conflicts")),
+        "mostly_aligns_with" => normalized_array(fetch_value(data, "mostly_aligns_with")),
         "what_would_make_this_a_5_of_5" => normalized_array(fetch_value(data, "what_would_make_this_a_5_of_5"))
       }
     end

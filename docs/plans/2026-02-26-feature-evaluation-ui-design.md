@@ -12,7 +12,7 @@ Build a single-page interface that lets a Product Owner paste a feature proposal
 ## Architecture
 - Single-page web app with two regions: left input, right evaluation panel.
 - Stateless UI: submits feature text to an evaluation service and renders results.
-- Evaluation service runs the existing evaluator agents (strategy, vision, JTBD, user flows, product charter, feedback) and an orchestrator to aggregate results.
+- Evaluation service runs the existing evaluator agents (strategy, vision, JTBD, product charter, feedback) and an orchestrator to aggregate results.
 - Progressive disclosure on the right: summary first, details on demand.
 
 ## Components

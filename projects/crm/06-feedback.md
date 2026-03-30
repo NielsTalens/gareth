@@ -7,4 +7,4 @@ User Brian said:
 I sometimes want to see an overview of all actions that I have done the last week. Just to make sure I am not missing anything.
 The overview can be very simple: Time, the action and the content of that action.
 
-
+ do not like it when I have to do manual actions to get data in the CRM.

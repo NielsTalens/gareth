@@ -224,7 +224,6 @@ DOC_FILES = {
   strategy: "01-strategy.md",
   vision: "02-product-vision.md",
   jtbd: "03-jtbd.md",
-  user_flows: "04-user-flows.md",
   product_charter: "05-product-charter.md",
   feedback: "06-feedback.md"
 }.freeze
@@ -275,13 +274,11 @@ git commit -m "Load project docs for evaluation"
 - Create: `projects/sample-product-a/01-strategy.md`
 - Create: `projects/sample-product-a/02-product-vision.md`
 - Create: `projects/sample-product-a/03-jtbd.md`
-- Create: `projects/sample-product-a/04-user-flows.md`
 - Create: `projects/sample-product-a/05-product-charter.md`
 - Create: `projects/sample-product-a/06-feedback.md`
 - Create: `projects/sample-product-b/01-strategy.md`
 - Create: `projects/sample-product-b/02-product-vision.md`
 - Create: `projects/sample-product-b/03-jtbd.md`
-- Create: `projects/sample-product-b/04-user-flows.md`
 - Create: `projects/sample-product-b/05-product-charter.md`
 - Create: `projects/sample-product-b/06-feedback.md`
 - Create: `projects/empty_project/.keep`

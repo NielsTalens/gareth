@@ -7,7 +7,6 @@ require_relative "lib/evaluators/base"
 require_relative "lib/evaluators/strategy"
 require_relative "lib/evaluators/vision"
 require_relative "lib/evaluators/jtbd"
-require_relative "lib/evaluators/user_flows"
 require_relative "lib/evaluators/product_charter"
 require_relative "lib/evaluators/feedback"
 
@@ -16,7 +15,6 @@ DOC_FILES = {
   strategy: "01-strategy.md",
   vision: "02-product-vision.md",
   jtbd: "03-jtbd.md",
-  user_flows: "04-user-flows.md",
   product_charter: "05-product-charter.md",
   feedback: "06-feedback.md"
 }.freeze
@@ -80,7 +78,6 @@ post "/evaluate" do
     Evaluators::Strategy.new,
     Evaluators::Vision.new,
     Evaluators::Jtbd.new,
-    Evaluators::UserFlows.new,
     Evaluators::ProductCharter.new,
     Evaluators::Feedback.new
   ]

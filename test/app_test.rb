@@ -1,9 +1,46 @@
 require "test_helper"
 
 class AppTest < Minitest::Test
+  class BaseHarness
+    include Evaluators::Base
+
+    def agent_name
+      "test_agent"
+    end
+
+    def normalize_payload(payload)
+      send(:normalize, payload)
+    end
+  end
+
   def test_strategy_prompt_path_exists
     assert File.exist?(Evaluators::Strategy::PROMPT_PATH),
            "Expected strategy prompt path to exist: #{Evaluators::Strategy::PROMPT_PATH}"
+  end
+
+  def test_normalize_preserves_mostly_aligns_with
+    result = BaseHarness.new.normalize_payload(
+      "alignment_score" => 4,
+      "confidence_score" => 5,
+      "risk_level" => "Low",
+      "detected_conflicts" => [],
+      "mostly_aligns_with" => ["fast input", "reduced admin work"],
+      "what_would_make_this_a_5_of_5" => ["tighten onboarding"]
+    )
+
+    assert_equal ["fast input", "reduced admin work"], result["mostly_aligns_with"]
+  end
+
+  def test_normalize_defaults_mostly_aligns_with_to_empty_array
+    result = BaseHarness.new.normalize_payload(
+      "alignment_score" => 4,
+      "confidence_score" => 5,
+      "risk_level" => "Low",
+      "detected_conflicts" => [],
+      "what_would_make_this_a_5_of_5" => ["tighten onboarding"]
+    )
+
+    assert_equal [], result["mostly_aligns_with"]
   end
 
   def test_root_renders
@@ -72,16 +109,16 @@ class AppTest < Minitest::Test
     assert_includes agents, "strategy"
     assert_includes agents, "vision"
     assert_includes agents, "jtbd"
-    assert_includes agents, "user_flows"
     assert_includes agents, "product_charter"
     assert_includes agents, "feedback"
+    refute_includes agents, "user_flows"
   end
 
   def test_evaluate_returns_meta_counts
     post "/evaluate", { feature_proposal: "Test feature", project: "crm" }
     json = JSON.parse(last_response.body)
     meta = json["meta"]
-    assert_equal 6, meta["total"]
+    assert_equal 5, meta["total"]
     assert_equal meta["total"], meta["succeeded"] + meta["failed"]
   end
 

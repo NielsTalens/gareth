@@ -27,11 +27,13 @@ OUTPUT JSON schema:
   "alignment_score": 1-5,
   "confidence_score": 1-5,
   "risk_level": "Low|Medium|High",
+  "mostly_aligns_with": ["..."],
   "detected_conflicts": [{"conflict":"...","severity":"...","evidence":["...","..."]}],
   "what_would_make_this_a_5_of_5": ["..."]
 }
 
 RULES:
+- `mostly_aligns_with` should summarize the feedback, evidence, or performance signals that already support the feature.
 - If no evidence exists in the doc, alignment <= 3 and confidence <= 3.
 - If feedback contradicts the feature direction (users complain about complexity, feature adds complexity), risk High.
 - Evidence must cite specific feedback excerpts or metric statements.

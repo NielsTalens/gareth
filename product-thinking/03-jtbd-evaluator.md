@@ -26,11 +26,13 @@ OUTPUT JSON schema:
   "alignment_score": 1-5,
   "confidence_score": 1-5,
   "risk_level": "Low|Medium|High",
+  "mostly_aligns_with": ["..."],
   "detected_conflicts": [{"conflict":"...","severity":"...","evidence":["...","..."]}],
   "what_would_make_this_a_5_of_5": ["..."]
 }
 
 RULES:
+- `mostly_aligns_with` should name the jobs, outcomes, or pains the feature already supports well.
 - If you cannot map the feature to a stated job/outcome, alignment <= 3.
 - If it helps an edge job at the expense of a core job, risk is High.
 - Evidence should quote the relevant job/outcome statements and the feature parts.

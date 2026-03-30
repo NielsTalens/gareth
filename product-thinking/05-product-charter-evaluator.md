@@ -33,10 +33,12 @@ OUTPUT JSON schema:
   "alignment_score": 1-5,
   "confidence_score": 1-5,
   "risk_level": "Low|Medium|High",
+  "mostly_aligns_with": ["..."],
   "detected_conflicts": [{"conflict":"...","severity":"...","evidence":["...","..."]}],
   "what_would_make_this_a_5_of_5": ["..."]
 }
 
 RULES:
+- `mostly_aligns_with` should name the principles, boundaries, or behaviors the feature already matches.
 - If it expands scope beyond stated boundaries, alignment <= 2 and risk is High.
 - Evidence should quote scope/boundary lines from the doc.

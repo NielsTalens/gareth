@@ -28,6 +28,7 @@ Return JSON exactly in this schema:
   "alignment_score": 1-5,
   "confidence_score": 1-5,
   "risk_level": "Low|Medium|High",
+  "mostly_aligns_with": ["...", "..."],
   "detected_conflicts": [
     {"conflict": "...", "severity": "Low|Medium|High", "evidence": ["...", "..."]}
   ],
@@ -36,5 +37,6 @@ Return JSON exactly in this schema:
 
 RULES:
 - Evidence entries must be direct excerpts (short) from the strategy doc and/or feature proposal.
+- `mostly_aligns_with` should name the strategy pillars, objectives, or constraints the feature already supports.
 - If no clear pillar/objective is referenced, alignment <= 3.
 - If the feature contradicts a stated strategic constraint, alignment <= 2 and risk is High.

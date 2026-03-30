@@ -27,11 +27,13 @@ OUTPUT JSON schema:
   "alignment_score": 1-5,
   "confidence_score": 1-5,
   "risk_level": "Low|Medium|High",
+  "mostly_aligns_with": ["...", "..."],
   "detected_conflicts": [{"conflict":"...","severity":"...","evidence":["...","..."]}],
   "what_would_make_this_a_5_of_5": ["..."]
 }
 
 RULES:
 - Cite vision principles/future statements with short excerpts.
+- `mostly_aligns_with` should capture the main needs, principles, or target-group outcomes the feature already reinforces.
 - Penalize “scope creep” features that expand surface area without clear vision tie.
 - If the vision doc is ambiguous on this area, keep alignment moderate and lower confidence.

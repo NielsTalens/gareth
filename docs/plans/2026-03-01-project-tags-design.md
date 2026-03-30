@@ -43,7 +43,7 @@ Selected: Option 1.
 - If no `.md` files exist in the selected folder, return 400 indicating no `.md` files found.
 
 ## Test Examples
-- Add a small set of example project folders under `projects/` with minimal `.md` files that map to evaluator keys: `strategy`, `vision`, `jtbd`, `user_flows`, `product_charter`, `feedback`.
+- Add a small set of example project folders under `projects/` with minimal `.md` files that map to evaluator keys: `strategy`, `vision`, `jtbd`, `product_charter`, `feedback`.
 - Provide a lightweight manual test checklist if automated tests are not present.
 
 ## Testing Plan

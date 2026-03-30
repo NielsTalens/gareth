@@ -7,7 +7,6 @@ const AGENT_LABELS = {
   strategy: "Strategy",
   vision: "Product Vision",
   jtbd: "Jobs to be done",
-  user_flows: "User Flows",
   product_charter: "Product Charter",
   feedback: "Feedback"
 };
@@ -29,9 +28,11 @@ function normalizedSeverity(value) {
 
 function renderEvaluationDetails(ev) {
   const conflicts = Array.isArray(ev.detected_conflicts) ? ev.detected_conflicts : [];
+  const positiveAlignment = Array.isArray(ev.mostly_aligns_with) ? ev.mostly_aligns_with : [];
   const actions = Array.isArray(ev.what_would_make_this_a_5_of_5) ? ev.what_would_make_this_a_5_of_5 : [];
 
-  const conflictsHtml = conflicts.length
+  const primaryInsightsTitle = conflicts.length ? "Detected Conflicts" : "Mostly Aligns With";
+  const primaryInsightsHtml = conflicts.length
     ? `<ul class="conflict-list">${conflicts.map((entry) => {
         if (entry && typeof entry === "object") {
           const severity = normalizedSeverity(entry.severity);
@@ -48,6 +49,8 @@ function renderEvaluationDetails(ev) {
         }
         return `<li class="conflict-item">${escapeHtml(entry)}</li>`;
       }).join("")}</ul>`
+    : positiveAlignment.length
+    ? `<ul class="action-list">${positiveAlignment.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ul>`
     : "<p class=\"empty-copy\">No conflicts detected.</p>";
 
   const actionsHtml = actions.length
@@ -59,11 +62,11 @@ function renderEvaluationDetails(ev) {
       <div class="details-grid">
         <div><span class="detail-label">Alignment</span><strong>${escapeHtml(ev.alignment_score)}</strong></div>
         <div><span class="detail-label">Confidence</span><strong>${escapeHtml(ev.confidence_score)}</strong></div>
-        <div><span class="detail-label">Risk</span><strong>${escapeHtml(ev.risk_level)}</strong></div>
+      <div><span class="detail-label">Risk</span><strong>${escapeHtml(ev.risk_level)}</strong></div>
       </div>
       <section class="details-section">
-        <h4>Detected Conflicts</h4>
-        ${conflictsHtml}
+        <h4>${primaryInsightsTitle}</h4>
+        ${primaryInsightsHtml}
       </section>
       <section class="details-section">
         <h4>What Would Make This a 5/5</h4>
