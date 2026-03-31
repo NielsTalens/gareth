@@ -2,56 +2,89 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Gareth Feature Evaluation</title>
+    <title>Gantly Feature Evaluation</title>
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
-    <div class="page-header">
-      <div class="project-tags" data-project-tags>
-        <% if @projects.empty? %>
-          <div class="project-warning">No projects found in /home/nelis/Dev/gareth/projects</div>
-        <% else %>
-          <% @projects.each do |project| %>
-            <button type="button" class="project-tag<%= project == @default_project ? " active" : "" %>" data-project="<%= project %>">
-              <%= project %>
-            </button>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="view-tabs" data-view-tabs>
-        <button type="button" class="view-tab view-tab-feature active" data-view="feature">Feature Evaluation</button>
-        <button type="button" class="view-tab view-tab-coherence" data-view="coherence">Alignment Guard</button>
-      </div>
+    <div class="app-shell">
+      <header class="page-header">
+        <div class="brand-block">
+          <div class="brand-mark">G</div>
+          <div>
+            <div class="brand-kicker">Product Intelligence Workspace</div>
+            <h1 class="brand-title">Gantly</h1>
+            <p class="brand-subtitle">Validate feature ideas and structural product alignment in one focused review flow.</p>
+          </div>
+        </div>
+        <div class="header-controls">
+          <section class="header-panel">
+            <div class="control-label">Projects</div>
+            <div class="project-tags" data-project-tags>
+              <% if @projects.empty? %>
+                <div class="project-warning">No projects found in /home/nelis/Dev/gareth/projects</div>
+              <% else %>
+                <% @projects.each do |project| %>
+                  <button type="button" class="project-tag<%= project == @default_project ? " active" : "" %>" data-project="<%= project %>">
+                    <%= project %>
+                  </button>
+                <% end %>
+              <% end %>
+            </div>
+          </section>
+          <section class="header-panel">
+            <div class="control-label">Mode</div>
+            <div class="view-tabs" data-view-tabs>
+              <button type="button" class="view-tab view-tab-feature active" data-view="feature">Feature Evaluation</button>
+              <button type="button" class="view-tab view-tab-coherence" data-view="coherence">Alignment Guard</button>
+            </div>
+          </section>
+        </div>
+      </header>
+      <main class="layout page">
+        <section class="left task-panel">
+          <div class="task-header">
+            <div class="panel-eyebrow">Task Panel</div>
+            <h2 id="task-title" class="workspace-title">Feature Proposal</h2>
+          </div>
+          <div class="surface task-surface">
+          <div data-view-panel="feature">
+            <p id="task-help" class="input-help">Paste a proposed feature and Gantly will score it against the selected product definition.</p>
+            <textarea id="feature-input" class="feature-textarea"></textarea>
+            <div class="action-row">
+              <button type="button" id="evaluate" class="primary-button">Evaluate</button>
+              <div id="loading" class="inline-status hidden">Running evaluators...</div>
+            </div>
+          </div>
+          <div data-view-panel="coherence" class="hidden">
+            <h2 class="panel-title">Check document alignment</h2>
+            <p class="input-help">Run a structural coherence check across the selected project's strategy, vision, JTBD, and charter documents.</p>
+            <div class="action-row">
+              <button type="button" id="run-coherence" class="primary-button">Run Alignment Guard</button>
+              <div id="coherence-loading" class="inline-status hidden">Running alignment guard...</div>
+            </div>
+          </div>
+          </div>
+        </section>
+        <section class="right workspace-panel">
+          <div class="workspace-header">
+            <div>
+              <div class="panel-eyebrow">Workspace</div>
+              <h2 class="workspace-title">Results</h2>
+            </div>
+          </div>
+          <div class="summary surface" data-view-panel="feature">
+            <div class="summary-title">Evaluation Summary</div>
+            <div id="summary">No evaluation yet.</div>
+          </div>
+          <div class="summary surface hidden" data-view-panel="coherence">
+            <div class="summary-title">Alignment Guard Summary</div>
+            <div id="coherence-summary">No alignment guard run yet.</div>
+          </div>
+          <div id="cards" data-view-panel="feature"></div>
+          <div id="coherence-cards" class="hidden" data-view-panel="coherence"></div>
+        </section>
+      </main>
     </div>
-    <main class="layout page">
-      <section class="left">
-        <div data-view-panel="feature">
-          <h1>Feature Proposal</h1>
-          <p class="input-help">Paste a proposed feature and run an evaluation.</p>
-          <textarea id="feature-input" class="feature-textarea"></textarea>
-          <button type="button" id="evaluate" class="primary-button">Evaluate</button>
-          <div id="loading" class="hidden">Running evaluators...</div>
-        </div>
-        <div data-view-panel="coherence" class="hidden">
-          <h1>Alignment Guard</h1>
-          <p class="input-help">Run a coherence check across the selected project's core documents.</p>
-          <button type="button" id="run-coherence" class="primary-button">Run Alignment Guard</button>
-          <div id="coherence-loading" class="hidden">Running alignment guard...</div>
-        </div>
-      </section>
-      <section class="right">
-        <div class="summary" data-view-panel="feature">
-          <div class="summary-title">Evaluation Summary</div>
-          <div id="summary">No evaluation yet.</div>
-        </div>
-        <div class="summary hidden" data-view-panel="coherence">
-          <div class="summary-title">Alignment Guard Summary</div>
-          <div id="coherence-summary">No alignment guard run yet.</div>
-        </div>
-        <div id="cards" data-view-panel="feature"></div>
-        <div id="coherence-cards" class="hidden" data-view-panel="coherence"></div>
-      </section>
-    </main>
     <script src="/app.js"></script>
   </body>
 </html>

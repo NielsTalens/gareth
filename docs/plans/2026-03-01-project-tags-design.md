@@ -3,7 +3,7 @@
 Date: 2026-03-01
 
 ## Goal
-Make it easy to test Gareth with multiple product definitions by selecting a test project in the UI. Each project corresponds to a folder in `projects/` containing only `.md` product definition files. The selected project is sent alongside the feature proposal to the OpenAI API.
+Make it easy to test Gantly with multiple product definitions by selecting a test project in the UI. Each project corresponds to a folder in `projects/` containing only `.md` product definition files. The selected project is sent alongside the feature proposal to the OpenAI API.
 
 ## Context
 Current evaluation reads fixed files from `product-description/`. This makes testing multiple “products” cumbersome. We want a simple way to switch between sets of product definitions.

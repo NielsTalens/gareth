@@ -7,6 +7,8 @@ const projectTags = tagContainer ? Array.from(tagContainer.querySelectorAll(".pr
 const viewTabsContainer = document.querySelector("[data-view-tabs]");
 const viewTabs = viewTabsContainer ? Array.from(viewTabsContainer.querySelectorAll(".view-tab")) : [];
 const viewPanels = Array.from(document.querySelectorAll("[data-view-panel]"));
+const taskTitle = document.getElementById("task-title");
+const taskHelp = document.getElementById("task-help");
 const summary = document.getElementById("summary");
 const coherenceSummary = document.getElementById("coherence-summary");
 const featureCards = document.getElementById("cards");
@@ -15,6 +17,16 @@ let selectedProject = projectTags.find((tag) => tag.classList.contains("active")
 let activeView = viewTabs.find((tab) => tab.classList.contains("active"))?.dataset.view || "feature";
 const defaultFeatureSummary = summary?.textContent || "No evaluation yet.";
 const defaultCoherenceSummary = coherenceSummary?.textContent || "No alignment guard run yet.";
+const VIEW_CONTENT = {
+  feature: {
+    taskTitle: "Feature Proposal",
+    taskHelp: "Paste a proposed feature and Gantly will score it against the selected product definition."
+  },
+  coherence: {
+    taskTitle: "Document Alignment",
+    taskHelp: "Run a structural coherence check across the selected project's strategy, vision, JTBD, and charter documents."
+  }
+};
 const AGENT_LABELS = {
   strategy: "Strategy",
   vision: "Product Vision",
@@ -40,12 +52,16 @@ function normalizedSeverity(value) {
 
 function setActiveView(view) {
   activeView = view;
+  const viewContent = VIEW_CONTENT[view] || VIEW_CONTENT.feature;
+
   viewTabs.forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.view === view);
   });
   viewPanels.forEach((panel) => {
     panel.classList.toggle("hidden", panel.dataset.viewPanel !== view);
   });
+  if (taskTitle) taskTitle.textContent = viewContent.taskTitle;
+  if (taskHelp) taskHelp.textContent = viewContent.taskHelp;
 }
 
 function clearFeatureResults() {
