@@ -1,3 +1,3 @@
-# Gantly business goal validation
+# gentlii business goal validation
 
 ------

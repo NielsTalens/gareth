@@ -20,7 +20,7 @@ const defaultCoherenceSummary = coherenceSummary?.textContent || "No alignment g
 const VIEW_CONTENT = {
   feature: {
     taskTitle: "Feature Proposal",
-    taskHelp: "Paste a proposed feature and Gantly will score it against the selected product definition."
+    taskHelp: "Paste a proposed feature and gentlii will score it against the selected product definition."
   },
   coherence: {
     taskTitle: "Fundamentals Alignment",

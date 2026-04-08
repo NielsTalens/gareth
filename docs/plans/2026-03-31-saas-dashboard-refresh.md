@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Refresh the Gantly UI so it feels like a SaaS dashboard product shell instead of a plain tool screen.
+**Goal:** Refresh the gentlii UI so it feels like a SaaS dashboard product shell instead of a plain tool screen.
 
 **Architecture:** Keep the current Sinatra view and client-side behavior intact while restructuring the page into a stronger product header plus two-panel dashboard layout. Most of the work is in `views/index.erb` and `public/styles.css`, with no workflow changes in `public/app.js`.
 

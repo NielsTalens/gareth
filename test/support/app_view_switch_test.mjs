@@ -124,7 +124,7 @@ const elementsById = new Map([
   ["loading", new FakeElement({ id: "loading", classes: ["hidden"] })],
   ["coherence-loading", new FakeElement({ id: "coherence-loading", classes: ["hidden"] })],
   ["task-title", new FakeElement({ id: "task-title", textContent: "Feature Proposal" })],
-  ["task-help", new FakeElement({ id: "task-help", textContent: "Paste a proposed feature and Gantly will score it against the selected product definition." })],
+  ["task-help", new FakeElement({ id: "task-help", textContent: "Paste a proposed feature and gentlii will score it against the selected product definition." })],
   ["summary", new FakeElement({ id: "summary", textContent: "Completed 5/5 evaluator runs (0 failed)." })],
   ["coherence-summary", new FakeElement({ id: "coherence-summary", textContent: "No alignment guard run yet." })],
   ["cards", featureCardsPanel],
@@ -209,7 +209,7 @@ vm.runInContext(script, context, { filename: scriptPath });
 assert.equal(elementsById.get("task-title").textContent, "Feature Proposal");
 assert.equal(
   elementsById.get("task-help").textContent,
-  "Paste a proposed feature and Gantly will score it against the selected product definition."
+  "Paste a proposed feature and gentlii will score it against the selected product definition."
 );
 
 await elementsById.get("run-coherence").click();
@@ -220,7 +220,7 @@ assert.equal(coherenceTab.classList.contains("active"), true, "coherence tab sho
 assert.equal(featureCardsPanel.classList.contains("hidden"), true, "feature results should be hidden");
 assert.equal(coherenceCardsPanel.classList.contains("hidden"), false, "coherence results should be visible");
 assert.equal(featureCardsPanel.innerHTML, "", "feature results should be cleared when coherence runs");
-assert.equal(elementsById.get("task-title").textContent, "Document Alignment", "task title should switch to coherence mode");
+assert.equal(elementsById.get("task-title").textContent, "Fundamentals Alignment", "task title should switch to coherence mode");
 assert.equal(
   elementsById.get("task-help").textContent,
   "Run a structural coherence check across the selected project's strategy, vision, JTBD, and charter documents.",
@@ -238,6 +238,6 @@ assert.equal(coherenceCardsPanel.innerHTML, "", "coherence results should be cle
 assert.equal(elementsById.get("task-title").textContent, "Feature Proposal", "task title should switch back to feature mode");
 assert.equal(
   elementsById.get("task-help").textContent,
-  "Paste a proposed feature and Gantly will score it against the selected product definition.",
+  "Paste a proposed feature and gentlii will score it against the selected product definition.",
   "task helper copy should switch back to feature mode"
 );

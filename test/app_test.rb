@@ -55,7 +55,7 @@ class AppTest < Minitest::Test
     assert last_response.ok?
     assert_includes last_response.body, 'rel="icon" href="/logo.png"'
     assert_includes last_response.body, 'src="/logo.png"'
-    assert_includes last_response.body, 'alt="Gantly logo"'
+    assert_includes last_response.body, 'alt="gentlii logo"'
   end
 
   def test_logo_png_is_served_from_root_path
