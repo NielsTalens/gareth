@@ -8,4 +8,4 @@ Gentlii is here to support and facilitate Product Thinking.
 The suite consists of:
 - Product Guard — validates alignment between strategy, business case, product vision, goals, and JTBD
 - Feature Validator — checks if feature requests align with the product definition
-- Foundations — helps define and maintain a clear, structured product definitionentlii is a Product Thinking suite.
+- Foundations — helps define and maintain a clear, structured product definition
