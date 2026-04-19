@@ -31,7 +31,7 @@ Overtreding: standaard menselijke review zonder reden.
 
 ---
 
-## 3. Core Product Behaviours
+## 4. Core Product Behaviours
 
 - Prefill boven handmatige input
 - Realtime feedback
